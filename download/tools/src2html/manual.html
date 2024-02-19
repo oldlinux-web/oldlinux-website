@@ -1,0 +1,356 @@
+<html><head>
+<meta name="description" content="Convert your C/C++- or Chill-sourcecode to HTML, with links to all funktions inside the Sourcecode">
+<meta name="author" content="Joerg Feler, Berlin">
+<meta name="keywords" content="HTML, convert, src2html, chill, C++, sourcecode, source to, Quellcode">
+<meta name="date" content="2000-11-29T08:49:37+00:00">
+<title>src2htm Manual</title>
+</head>
+<body bgcolor=#ffffff text=black link=purple vlink=purple alink=silver>
+<font color=black>
+<h1><a name="top"><u>src2html Manual</u></a></h1>
+<h3><a name="anker1">Introduction</a></h3>
+With src2html you can convert a Chill- or C-Sourcecode, to HTML-Code. Then 
+it can be displayed with any HTML-Browser. 
+<br>	  
+<h3><a name="anker2">Available Functions</a></h3>
+<ul>
+  <li>All function- and procedure calls
+  are converted to hyperlinks to each definition. Chill, and C (incl. C++ Comments) 
+  will be supported.</li>
+
+  <li>Automatic detection of the programing language</li>
+  <li>The Code will be colored, different colors for
+    <ul> 
+    <li>Strings</li>
+    <li>Digits</li>
+    <li>Language keywords (expandable)</li>
+    <li>Comments</li>
+    <li>user defined keywords</li>
+    </ul>
+      are used.</li>
+  <li>Most of the HTML-Code can be predefined by the user</li>
+  <li>Javascript functions can be included</li>
+  <li>All names of functions and procedures are listed in a separat frame</li>
+  <li>Browsers which can't handle frames are supported</li>
+<br>
+</ul>
+<h3><a name="anker3">Restrictions</a></h3>
+<ul>
+<li>It must be possible to compile the source code error free</li>
+<li>Functions with the same name, but different parameters are not  
+    detected as different</li>
+<li>Using DOS, the name of the source code shall not longer then 5 chars. The reason is the 8.3 restriction
+    in the DOS naming convention. "ABCDE.C" is ok. 
+    The *.htm file can be renamed afterwards.</li>
+<li>Using Linux/Unix, hidden files (.xxx.c) or hidden directories are not suported as 
+    parameter</li>
+<li>Include files are not included automaticly, but can be copied into the source by hand 
+    before src2html starts. </li>
+<li>The INI-Files must be in the actual directory, where src2html will be started.</li>
+
+</ul>
+
+
+<h3><a name="anker4">Delivered Files</a></h3>
+ 3 INI-Files:
+
+
+<ul>
+<li>src2html.ini</li>
+<li>langkeywords.ini</li>
+<li>otherkeywords.ini</li>
+</ul>
+and one Javascript file
+<ul><li>src2html.js</li></ul>
+
+These files are not required, if you dont't like to change the default values. <br>
+<br>
+Default values are used if the corresponding ini file was not found.  
+Into the delivered files  
+<ul>
+<li>src2html.ini</li>
+<li>langkeywords.ini</li>
+</ul>
+are all the actual default values. So you don't need them until you change something. They are  
+as information for you, to see all the default values. <br>
+<br>
+The other files are handled like empty files, if one can not be found. There are no default values. 
+
+<h3><a name="anker4a">Starting src2html</a></h3>
+src2html [Path]Sourcefile [[Path]Targetfile] 
+<br><br>
+Using Linux/Unix, hidden files (.xxx.c) or hidden directories are not suported as 
+    parameter 
+The target file get the extention .htm
+<br><br>
+If you like to use ini files, you must change the actual directory to that one, where the ini files reside.
+Start src2html from that directory.
+So it is possible to use different ini files only by changing the actual directory.
+
+
+<h3><a name="anker6">Changing Colors</a></h3>
+
+In  src2html.ini are  (nearly) all HTML-codes defined, which are copied into the source. 
+So it is easy to change something. It is possible to change the colors, fonts or anything else possible wit HTML.<br>
+<br>
+Short explaination to the lines in src2html.ini:<br>
+<br>
+A semicolon in column 1 starts a comment. The types of markings are numbered. These numbers are used by src2html to detect 
+the type, but are not copied into the source. Preceding blanks are allowed. Anything behind the dot will 
+be copied into the source. The max. length of a line in the ini files is 1024 characters.
+
+<pre>
+<h4> 4, 5, 6 Definition of a procedure/function</h4>
+;   <font color=blue>&lt;font color=purple&gt;&lt;a name="</font>targetdef<font color=blue>"&gt;</font>define target<font color=blue>&lt;/a&gt;&lt;/font&gt;</font>
+;   ----------------------------         --             -----------
+;   4. (zs_html_proc_def_a)
+<font color=red>4.</font><font color=blue>&lt;font color=purple&gt;&lt;a name="</font>
+;   5. (zs_html_proc_def_b)
+<font color=red>5.</font><font color=blue>"&gt;</font>
+;   6. (zs_html_proc_def_c)
+<font color=red>6.</font><font color=blue>&lt;/a&gt;&lt;/font&gt;</font>
+
+<h4>7, 8, 9 Hyperlink to a procedure/function</h4>
+;   <font color=blue>&lt;a href="</font>#targetdef<font color=blue>"&gt;</font>link to target<font color=blue>&lt;/a&gt;</font>
+;   ---------          --              ----
+;   7. (zs_html_proc_use_a)
+<font color=red>7.</font><font color=blue>&lt;a href="</font>
+;   8. (zs_html_proc_use_b)
+<font color=red>8.</font><font color=blue>"&gt;</font>
+;   9. (zs_html_proc_use_c)
+<font color=red>9.</font><font color=blue>&lt;/a&gt;</font>
+
+<h4>10, 11, 12 Hyperlink to a procedure/function inside a comment</h4>
+
+;   <font color=blue>&lt;a href="</font>#targetdef<font color=blue>"&gt;&lt;font color=forestgreen&gt;</font>link to target<font color=blue>&lt;/font&gt;&lt;/a&gt;</font>
+;   ---------           -------------------------              -----------
+;   10. (zs_html_cproc_use_a)
+<font color=red>10.</font><font color=blue>&lt;a href="</font>
+;   11. (zs_html_cproc_use_b)
+<font color=red>11.</font><font color=blue>"&gt;&lt;font color=forestgreen&gt;</font>
+;   12. (zs_html_cproc_use_c)
+<font color=red>12.</font><font color=blue>&lt;/font&gt;&lt;/a&gt;</font>
+</pre>
+<h4>13, 14, 28 Keywords, defined in langkeywords.ini</h4>
+Here is something special:<br>
+<br>
+  If <font color=red>28</font> is not defined, the keyword is printed only ones.
+  If you define <font color=red>28</font>, the keyword is printed behind the code of <font color=red>15</font>. again, followed by 
+  the code defined with <font color=red>28</font>.    
+  
+  
+<h5>Example without <font color=red>28</font>.:</h5>
+
+<pre>
+;   <font color=blue>&lt;font color=blue&gt;</font>blue text<font color=blue>&lt;/font&gt;</font>
+;   -----------------         -------
+;   13. (zs_html_keyword_def_a)
+<font color=red>13.</font><font color=blue>&lt;font color=blue&gt;</font>
+;   14. (zs_html_keyword_def_b)
+<font color=red>14.</font><font color=blue>&lt;/font&gt;</font>
+  
+<h5>Example with <font color=red>28</font>.:</h5>
+; if you define 28, the keyword is printed twice!
+; so 13 and 14 are used in another way  
+; example:
+;   <font color=blue>&lt;a href="javascript:q_help('</font>keyword<font color=blue>')" style="text-decoration: none;color:blue;"&gt;</font>keyword<font color=blue>&lt;/a&gt;</font>
+;   ----------------------------       ----------------------------------------------       ----
+;   13. (zs_html_other_keyword_def_a)
+<font color=red>13.</font><font color=blue>&lt;a href="javascript:q_help('</font>
+;   14. (zs_html_keyword_def_b)
+<font color=red>14.</font><font color=blue>')" style="text-decoration: none;color:blue;"&gt;</font>
+;   28. (zs_html_keyword_def_c)
+<font color=red>28.</font><font color=blue>&lt;/a&gt;</font>
+
+<h4>15, 16 Commented keywords, defined in langkeywords.ini</h4>
+;   15, 16 color of comments
+;   <font color=blue>&lt;font color=forestgreen&gt;</font>forestgreen text<font color=blue>&lt;/font&gt;</font>
+;   ------------------------                -------
+;   15. (zs_html_comment_def_a)
+<font color=red>15.</font><font color=blue>&lt;font color=forestgreen&gt;</font>
+;   16. (zs_html_comment_def_b)
+<font color=red>16.</font><font color=blue>&lt;/font&gt;</font>
+
+<h4>17, 18 Digits</h4>
+;   17, 18 color of digits (e.g. 123 )
+;   <font color=blue>&lt;font color=red&gt;</font>red text<font color=blue>&lt;/font&gt;</font>
+;   ----------------        -------
+;   17 (zs_digitStart)
+<font color=red>17.</font><font color=blue>&lt;font color=red&gt;</font>
+;   18 (zs_digitEnd)
+<font color=red>18.</font><font color=blue>&lt;/font&gt;</font>
+
+<h4>19, 20 Strings "ABC"</h4>
+;   19, 20 color of strings (e.g. "ABC" )
+;   <font color=blue>&lt;font color=dimgray&gt;</font>dimgray text<font color=blue>&lt;/font&gt;</font>
+;   --------------------            -------
+;   19 (zs_StringStart)
+<font color=red>19.</font><font color=blue>&lt;font color=dimgray&gt;</font>
+;   20 (zs_StringEnd)
+<font color=red>20.</font><font color=blue>&lt;/font&gt;</font>
+
+<h4>21, 22 Character 'A'</h4>
+;   21, 22 color of char (e.g. 'A' )
+;   <font color=blue>&lt;font color=dimgray&gt;</font>dimgray text<font color=blue>&lt;/font&gt;</font>
+;   --------------------            -------
+;   21 (zs_CharStart)
+
+<font color=red>21.</font><font color=blue>&lt;font color=dimgray&gt;</font>
+;   22 (zs_CharEnd)
+<font color=red>22.</font><font color=blue>&lt;/font&gt;</font>
+
+<h4>23, 24 Chill Binary- and Hex-digits H'FF </h4>
+;   23, 24 color of binary or hex digits in chill (e.g. H'FFFF)
+;   <font color=blue>&lt;font color=red&gt;</font>red text<font color=blue>&lt;/font&gt;</font>
+;   ----------------        -------
+;   23 (zs_ChillCharStart)
+<font color=red>23.</font><font color=blue>&lt;font color=red&gt;</font>
+;   24 (zs_ChillCharEnd)
+<font color=red>24.</font><font color=blue>&lt;/font&gt;</font>
+</pre>
+<h4>25, 26, 27 Keywords, defined in otherkeywords.ini</h4>
+Here is something special:<br>
+<br>
+  If <font color=red>27</font> is not defined, the keyword is printed only ones.
+  If you define <font color=red>27</font>, the keyword is printed behind the code of <font color=red>26</font>. again, followed by 
+  the code defined with <font color=red>27</font>.    
+  
+
+<h5>Example without <font color=red>27</font>.:</h5>
+<pre>
+;   25, 26 color of other keywords  (27 not defined)
+;   declared in otherkeywords.ini
+;   <font color=blue>&lt;font color=red&gt;</font>keyword<font color=blue>&lt;/font&gt;</font>
+;   ----------------       -------
+;   25. (zs_html_other_keyword_def_a)
+<font color=red>25.</font><font color=blue>&lt;font color=red&gt;</font>
+;   26. (zs_html_other_keyword_def_b)
+<font color=red>26.</font><font color=blue>&lt;/font&gt;</font>
+
+<h5>Example with <font color=red>27</font>.:</h5>
+; if you define 27, the keyword is printed twice!
+; so 25 and 26 are used in another way  
+; example:
+;   <font color=blue>&lt;a href="javascript:q_help('</font>keyword<font color=blue>')" style="text-decoration: none;color:blue;"&gt;</font>keyword<font color=blue>&lt;/a&gt;</font>
+;   ----------------------------       ----------------------------------------------       ----
+;   25. (zs_html_other_keyword_def_a)
+<font color=red>25.</font><font color=blue>&lt;a href="javascript:q_help('</font>
+;   26. (zs_html_other_keyword_def_b)
+<font color=red>26.</font><font color=blue>')" style="text-decoration: none;color:blue;"&gt;</font>
+;   27. (zs_html_other_keyword_def_c)
+<font color=red>27.</font><font color=blue>&lt;/a&gt;</font>
+
+<h4>Frames</h4>
+The size and color of the frames can be changed, but the title is always the name of the source file.
+
+<h5>Source Frame</h5>
+;   1. Headerline of Source frame  (zs_first_line_a2)
+<font color=red>1.</font><font color=blue>&lt;/title&gt;&lt;/head&gt;&lt;body bgcolor=#ffffff text=black link=purple vlink=purple alink=silver&gt;&lt;font color=black&gt;&lt;pre&gt;</font>
+
+<h5>Left Frame with the list of procedures/functions</h5>
+;   2. Headerline of left frame (zs_first_line_a2pl)
+<font color=red>2.</font><font color=blue>&lt;/title&gt;&lt;/head&gt;&lt;body bgcolor=#ffffff text=black link=purple vlink=purple alink=silver&gt;&lt;font color=black&gt;&lt;pre&gt;</font>
+
+<h5>Frame Size</h5> 
+;   3. Frame definition (zs_FrameDef_a1)
+<font color=red>3.</font><font color=blue>"&lt;/title&gt;&lt;/head&gt;&lt;frameset cols="20%,*" border=1 frameborder=1 framespacing=1&gt;&lt;frame src="</font>
+
+</pre>
+<h3><a name="anker5">Example With Javascript </a></h3>
+Into the directory example, you can see, how to call a javascript function with the 
+help of the INI-Files. If a keyword is clicked, a new window info.html is opened. It is scrolled to
+that anchor, which has the same name than the keyword.
+
+<br><br>
+example.c was converted with the command <u>../src2html example.c</u>  
+<br><br>
+As result, example.htm was generated. <br>
+example.htm consist of 2 frames, which are filled with examplelf.htm and examplesrc.htm. 
+<br><br>
+<h4>Definition of keywords</h4>
+
+Into otherkeywords.ini are keywords defined. They are used as anchor in info.html. 
+
+<br><br>
+A part of otherkeywords.ini :<br>
+anker1<br>
+anker2<br>
+anker3<br>
+anker4<br>
+anker5<br>
+anker6<br>
+anker7<br>
+<br>
+<h4>Deklaration Of Javascript Function</h4>
+In src2html.ini is the link to the javascript function defined. 
+A part of src2html.ini :<br>
+<pre>
+  <font color=red>1.</font>&lt;/title&gt;<font color=blue>&lt;script language="JavaScript" src="src2html.js" type="text/javascript"&gt;</font>&lt;/script&gt;&lt;/head&gt;&lt;body bgcolor=#ffffff text=black link=purple vlink=purple alink=silver&gt;&lt;font color=black&gt;&lt;pre&gt; 
+:
+.
+  <font color=red>25.</font><font color=blue>&lt;a href="javascript:q_help('</font>
+  ;   otherkeyword
+  <font color=red>26.</font><font color=blue>')" style="text-decoration: none;color:blue;"&gt;</font>
+  ;   other_keyword
+  <font color=red>27.</font><font color=blue>&lt;/a&gt;</font>             
+
+</pre>
+At <font color=red>1.</font> is the headline of the html file defined. here is the link to src2html.js inserted.
+At <font color=red>25.</font> is the call of q_help(), which is defined in src2html.js definiert. As parameter,  
+we use the keyword which is defined in otherkeywords.ini and found into the source file.
+<br><br>
+<h4>Definition Of Javascript Function</h4>
+The definition of the javascript function is defined in the file <font color=blue>src2html.js</font>, which is declared after <font color=red>1.</font>
+<br><br>
+<pre>
+function q_help( zp_anchor)
+ {    
+   MyWindow = window.open("info.html", "helpfile");
+   MyWindow.focus();
+   MyWindow.location.href = "info.html#"+zp_anchor;
+ }
+
+</pre>
+
+<h3><a name="anker7">Editorial</a></h3>
+
+This program was written by <a href="mailto:src2htm@feler.de?subject=src2html">J&ouml;rg Feler</a>. <br>
+From now on, (Version 0.1g) src2html is licensed by the GNU General Public License. 
+<pre>
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+</pre>
+You can download the 
+<a href="http://cgi.feler.homelinux.net/src2html/v0.1g/gpl.txt" target = "_blank">GNU General Public License</a>. 
+<br><br> 
+No software is error free, but src2html has been tested extensive.  
+If you find an error, drop me a mail with a short description and the version please. All registered users will be informed, if a new version of src2html is available. 
+
+<br><br>
+Find the latest version at <a href="http://www.feler.de/src2html/src2html.html" target="_blank" >http://www.feler.de/src2html/src2html.html</a>
+<br><br> 
+
+Have fun<br><a href="mailto:src2htm@feler.de?subject=src2html">J&ouml;rg Feler</a>
+
+<br><br><hr>
+<script language="JavaScript">
+  document.write("Last update: " + document.lastModified );
+  z_count_url = "http://cgi.feler.homelinux.net/cgi-bin/counter/neuercounter.pl?11120005&"+document.URL+"&"+document.title+"&"+document.referrer;
+  z_count = new Image();
+  z_count.src = z_count_url;
+</script>
+by <a href="../joerg.html">J. Feler</a><br>
+</body></html>

@@ -1,0 +1,53 @@
+body {
+	margin:10px; padding:0px; background:#fff; color:#000; 
+	font-family:Sans-Serif;
+}
+h1 {
+	padding:4px; text-align:center; border:4px double #000;
+	background:#ffd;
+}
+h2 {
+	padding:4px; border:1px solid #888;
+	background:#ffd;
+}
+table {
+	border:0;
+	margin-left:auto;
+	margin-right:auto;
+	margin-bottom:10px;
+}
+th {
+	background:#bbd; padding:2px;
+}
+td {
+	padding:2px;
+	border-bottom:1px dotted #bbd;
+}
+td.plain {
+	padding:2px;
+	border-bottom:0;
+}
+img {
+	border:0; vertical-align: middle;
+}
+blockquote {
+	font-weight:bold; font-size:80%;
+}
+a:hover		{background:#ff0;}
+a:hover img	{background:#fff;}
+.headtext	{color:#889;text-align:center;}
+#container      {width: 600px;text-align:center;clear:both;margin-left: auto;margin-right: auto;}
+#directory	{float: left;margin-left:auto;margin-right:auto;}
+#bigredbutton   {float: right;}
+#bandwidth	{color:#889;text-align:center;font-size:75%;}
+.bandwidth	{color:#889;text-align:center;font-size:75%;}
+#news		{color:#003;}
+#sponsors	{text-align:center;margin-left:auto;margin-right:auto;}
+#trademark	{font-size:75%;text-align:center;}
+#versions	{text-align:center;}
+.kver		{text-align:center;color:#004;font-size:90%;padding:10px;}
+.pvkey		{color:#400;font-size:66%;}
+p		{margin-left:10px; margin-right:10px;}
+.newsitem	{border-bottom:1px dotted #bbd;padding:2px;margin-right:20px;font-size:75%}
+.newsitem p	{margin-left:0px;margin-top:3px;margin-bottom:3px;}
+

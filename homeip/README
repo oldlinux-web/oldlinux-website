@@ -1,0 +1,31 @@
+	Home IP obtaining program  
+	Zhao Jiong	
+
+This program is used to get a home external IP with in a website outside. It has two 
+programs (c/s) and three text files described as following.
+
+Packet Name:	homeip
+
+Server Name:	/usr/bin/homeipd	// On server machine.	
+Server config:	/etc/homeipd.conf
+Server result:	/var/www/oldlinux.org/homeip.txt ( created automatically )
+
+Client Name:	/usr/bin/homeipc	// On clinet machine.
+Client config:	/etc/homeipc.conf
+
+Protocol: 	TCP, UDP
+Port:		55535
+
+The server is homeipd, it listens to the port 55535 using TCP or UDP protocols. When it
+receives a line of text string and that is contained in the homeipd.conf, then it get the 
+source IP address and saved in the homeips.txt file with the string in the same line.
+
+The client program is named as homeipc. It send a line of the authentication string from its
+config file homeipc.conf, using TCP or UDP protocols periodically with crontab program.
+
+To run:
+nohup ./homeipd2 &
+
+
+Jiong.zhao@tongji.edu.cn
+2017.11.13

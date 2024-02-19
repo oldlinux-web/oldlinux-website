@@ -1,0 +1,50 @@
+server {
+	server_name minix.net *.minix.net;
+        root /var/www/homepage/Linux.old/Minix;
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+                root   /var/www/nginx-default;
+        }
+        location ~ ^/oldlinux/.*images {
+	  access_log off;
+          if (-f $request_filename) {
+            expires 5d;
+            break;
+          }
+        }
+	location / {
+		autoindex on;
+		alias /var/www/homepage/Linux.old/Minix/;
+	}
+
+#        location / {
+#        index index.php index.html ind.html ;
+#        }
+
+        location ~ \.php$ {
+                fastcgi_pass   unix:/var/run/php-fpm/php-fcgi.sock;
+                fastcgi_index  index.php;
+                fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+                include /etc/nginx/fastcgi_params;
+        }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/minix.net/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/minix.net/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+    if ($host = minix.net) {
+        return 301 https://$host$request_uri;
+    } # managed by Certbot
+
+
+        listen   80;
+	server_name minix.net *.minix.net;
+    return 404; # managed by Certbot
+
+
+}

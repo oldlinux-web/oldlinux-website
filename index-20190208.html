@@ -1,0 +1,309 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0020)http://oldlinux.org/ -->
+<HTML><HEAD><TITLE>Oldlinux.org -- Linux plinux - Early Linux Kernel Analysis and Comments</TITLE>
+<META content="text/html; charset=gb2312" http-equiv=content-type>
+<META name=keywords content="Oldlinux, plinux, ulinux, glinux, tlinux, linuxdb">
+<META name=keywords content="Ancient Linux, kernel sourcecode analysis">
+<META name=GENERATOR content="MSHTML 9.00.8112.16450">
+<link rel="stylesheet" href="/oldlinux.css" type="text/css" />
+</HEAD>
+<BODY>
+<CENTER>
+<H1><B><FONT face="Times New Roman, Times">Welcome to OldLinux 
+</B></H1></CENTER>
+<HR>
+
+<H3><B><FONT face="Times New Roman, Times">SITE TARGETS</FONT></B></H3>
+      <UL>
+        <LI>Collect all the materials related to the ancient Linux for historic 
+        testimony; 
+        <LI>Rebuild the oldest Linux system that couldn't found anywhere nowaday 
+        ; 
+        <LI>Provide an easiest way to learn the basics of Linux for newbies; 
+        <LI>For fun :-) </LI></UL>
+      <HR>
+      <BR>
+      <UL>
+        <LI>An old paper written by Linus: <A 
+        href="http://www.oldlinux.org/Linus/index.html">"Linux--a free unix-386 
+        kernel" </A>(<A href="http://www.oldlinux.org/Linus/911010.pdf"> pdf version 
+        </A>) 
+        <LI>Ebook &amp; published book in chinese: <A 
+        href="http://www.oldlinux.org/book.html">"A Heavily Commented Linux kernel 
+        Source Code (Kernel 0.11)"</A> </LI></UL>
+      <HR>
+      <BR>
+      <H3><B><FONT face="Times New Roman, Times">MAIN MENU</FONT></B></H3>
+      <UL>
+        <LI>Forum is now closed temporarily due to the security problems of the site. It will be opened again when the forum upgraded.
+        <BR><BR>
+        <LI><A href="http://www.oldlinux.org/Linux.old/">Linux Ancient Resources</A> 
+        -- Early and old Linux docs, source code and bins. (Linux.old) <BR><BR>
+	<LI><A href="http://www.oldlinux.org/Book-Lite/">Book online resources</A>
+	-- Kernel 0.12 source code, all commented in chinese, and with in types of pdf & html. <BR><BR>
+        <LI><A 
+        href="http://www.oldlinux.org/homepage/">oldlinux.org/homepage/</A> -- 
+        My personal webpage :) [ Obsoleted ... ]</LI></UL>
+      <HR>
+
+<HR>
+<!---- Changelog ----!>
+<H3><B><FONT face="Times New Roman, Times">CHANGELOG</FONT></B></H3>
+<UL>
+	<LI>2019-02-08 &nbsp <img src=images/New-icon.png width=60 height=30><BR>
+	Time flies, it's flying fast, and it's been two years till now. The latest Chinese revision, the Fifth revision of 
+the book:"<Font Color=Red>A Heavily Commemted Linux Kernel Source Code</Font>" is now <A 
+href=download/CLK-5.0-WithCover.pdf>HERE</A>, and, more importantly, the <Font Color=Red>English 
+version</font> of the book is also given <A href=download/ECLK-5.0-WithCover.pdf>HERE</A>. After nearly one 
+year of translation, the English version of this book has finally been completed. Of course, there must be  
+translation errors and tipos in the book. I hope you may point them out for me. Finally, thanks Trent Jarvi who helped me a lot,
+thank you friends in the linux communities, and thank you all, and 
+Happy Chinese Spring Festival!
+
+	<LI>2016-11-22<BR>
+	Oldlinux.org is hosted on a computer provided by my friend NightCat during the past decade. Nothing can fully express my thanks to him. Now due to the forum security issue, I have to stop it temporarily at this moment. I'll keep upgrading it to new veresion and reopen the forum if upgrade process succeed. Now the collections of old stuffs of Linux is still available for you to check and downloading. Thanks everybody who have contribute to the site!
+	<LI>2012-10-21<BR>
+	A long time passed! I found someone is also interested in the old things. <A
+	href="http://virtuallyfun.superglobalmegacorp.com/?author=1"> Neozeed </A> built
+	some <A href="http://virtuallyfun.superglobalmegacorp.com/?p=272"> Linux 0.00, 0.1x
+	images </A> running on <A href="http://www.qemu.org/"> Qemu emulator </A>. 
+	I also put them <A href="http://www.oldlinux.org/Linux.old/qemu-images/"> HERE </a>
+	for people to find them easily. Thanks <A
+	href="http://virtuallyfun.superglobalmegacorp.com/?author=1"> Neozeed </A>.
+	And during this period of time, I also find some valuable old things. The first is
+	the source code of <A href="http://oldlinux.org/Linux.old/libs/libc/libc-0.1x/"> lib-0.12 </A>
+	for kernel 0.12. The other is the full ancient Linux system using kernel 0.98 patchlevel 1 released early by SLS, 
+	<A href="http://oldlinux.org/Linux.old/distributions/SLS/sls-1992.11.zip"> the 0.98pl1 system </A>.
+	
+  <LI>2010-06-28<BR>Well, since the ebook <A 
+  href="http://oldlinux.org/download/clk011c-2.0.1.pdf">clk011c-2.0.1.pdf </A>on 
+  the net, I have already present its next version <A 
+  href="http://www.oldlinux.org/download/clk011c-3.0.pdf">clk011c-3.0.pdf</A> 
+  here in the last year. This is only a remark of it. Again, it's in Chinese, 
+  Sorry!:) 
+  <LI>2008-10-21<BR>After the book (based on kernel 0.12) published in Taiwan in 
+  2005, the same simplified chinese book published in mainland finally. This new 
+  book has nearly 960 pages and thus a little expansive than the book based on 
+  kernel 0.11. But all in all, the new book should have less mistakes than the 
+  old the version. 
+  <LI>2007-06-07<BR>Wow, 10 months passed from the last updating. Hello! Again, 
+  we moved to the other new forum (Discuz!) programmed using PHP + MySQL. We 
+  have done corrections to the ebook a lot. So we now present the new version of 
+  the ebook here: <A 
+  href="http://oldlinux.org/download/clk011c-2.0.1.pdf">clk011c-2.0.1.pdf 
+  </A>(V2.0.1). We hope you like it. 
+  <LI>2006-08-09<BR>Moving to the new forum smoothly. Updated the Leo BBS 
+  package (LB5000XP) to the current version <A 
+  href="http://www.leobbs.com/">(LeoBBS X Build060606)</A>. There are lots of 
+  new features in this new forum version, including show more than one pic in 
+  one post. In the recent time, I plan to change the style of this main page a 
+  little :) 
+  <LI>2006-06-20<BR>An enhanced version of my book "A Heavily Commented Linux 
+  kernel Source Code" has been published by the China Machine Press early this 
+  year (2006.1.8). Several new chapters describing the basic information of the 
+  kernel have been added, and almost all the source code comments have been 
+  rewritten to be more readable &amp; understandable :)<BR>
+  <LI>2005-07-30<BR>From 21th to 24th July 2005, I participated the Ottawa Linux 
+  Symposium (OLS2005) held in Ottawa Canada. Actually, the conference began from 
+  19th to 24th, but I met some problems with my vesa, this caused me 2 days late 
+  and missing the chance to meet Linus Toravalds :( <BR>Although I have made a 
+  <A 
+  href="http://www.linuxsymposium.org/2005/speakers.php?types=TUTORIAL">toturial 
+  speech</A> (<A href="http://oldlinux.org/photos/IMG_0056.JPG">photo</A> )at 
+  the conference, the main target for me is accturally as a newbie to learn 
+  from, to meet the top hackers in the Linux community all of the world. Through 
+  the continuing help of Trent Jarvi (photo, from Denver University), I talked 
+  to many famous hackers during the conference. These include Theodore Ts'o (<A 
+  href="http://oldlinux.org/photos/IMG_0088.JPG">photo</A>, <A 
+  href="http://thunk.org/tytso/">One of the earlest Linux hackers</A>), Jon 
+  "maddog" Hall (<A href="http://oldlinux.org/photos/IMG_0087.JPG">photo</A>, <A 
+  href="http://www.li.org/">President of Linux International</A>), Donald Becker 
+  (<A href="http://oldlinux.org/photos/IMG_0086.JPG">photo</A>, <A 
+  href="http://www.scyld.com/">Network driver programmer</A>), David Jones (<A 
+  href="http://oldlinux.org/photos/IMG_0100.JPG">photo</A>, <A 
+  href="http://www.codemonkey.org.uk/">Current kernel maintainer</A>), Andrew 
+  Morton (photo, <A href="http://www.zipworld.com.au/~akpm/">Kernel 
+  maintainer</A> ) and many other warm guys in the Linux community. I will show 
+  all photos I took in the conference here soon. There are a lot of photos taken 
+  by others. These <A href="http://uzix.org/photo/linux/ols/ols2k5/">photos</A> 
+  was taken by Joshua Uziel <BR>You can download the conference proceedings from 
+  the <A href="http://www.linuxsymposium.org/">Linux symposium website</A>: <A 
+  href="http://www.linuxsymposium.org/2005/linuxsymposium_procv1.pdf">Volume 
+  1</A> and <A 
+  href="http://www.linuxsymposium.org/2005/linuxsymposium_procv2.pdf">Volume 
+  2</A>. 
+  <LI>2005-03-13<BR>Here is a good paper <A 
+  href="http://oldlinux.org/Linux.old/study/Ref-docs/Linux011-Mem-YuanYi.pdf">"Memory 
+  Management under Linux 0.11"</A> written by Yuan Yi. This paper describes all 
+  codes in Linux 0.11 relating to memory management. It describes the 
+  relationship betweens these code, including the algorithms of allocation &amp; 
+  release of memory. 
+  <LI>2004-12-17<BR>Linux 0.00 - a fake version :) Since Linus dialed up his 
+  MINIX partition of his harddisk, the orignal version of Linux 0.00 lost for 
+  ever. I built it under Linux 0.11. Just for fun and for learning something. 
+  Two tasks multitasking in level 3. But they are coded as part of the 'kernel' 
+  source code, same as task0 &amp; task1 in Linux system. It has got one 'system 
+  call' to display character on the screen. Download the <A 
+  href="http://oldlinux.org/Linux.old/bochs/linux-0.00-041217.zip">linux-0.00-041217.zip</A> 
+  running under bochs, or the <A 
+  href="http://oldlinux.org/Linux.old/kernel/0.00/linux-0.00-041217.tar.gz">source 
+  code</A> for it.<BR>"it switched between two processes that printed AAAA... 
+  and BBBB... respectively by using the timer-interrupt - Gods I was proud over 
+  that" --- Linus Torvalds 
+  <LI>2004-09-29<BR>To facilitate the understanding of the source file 
+  kernel/blk_drv/ramdisk.c of the Linux 0.11, a integrated image file <A 
+  href="http://oldlinux.org/Linux.old/images/bootroot-0.11">bootroot-0.11</A> 
+  has been built, which incoorperates the kernel boot image with a small MINIX 
+  rootfs in the same one diskette image file. You can boot the Linux 0.11 system 
+  to the shell command prompt with only one diskette. You can also download the 
+  bootroot package with experiment parts files from <A 
+  href="http://oldlinux.org/Linux.old/bochs/bootroot-0.11-040928.zip">bootroot-0.11-040928.zip</A> 
+  in the <A href="http://oldlinux.org/Linux.old/bochs/">/Linux.old/bochs/ 
+  directory</A>. 
+  <LI>2004-09-28<BR>Many people want to boot the Linux 0.11 system from harddisk 
+  image file (e.x. hdc-0.11.img). A new Linux 0.11 developement system <A 
+  href="http://oldlinux.org/Linux.old/bochs/linux-0.11-devel-040923.zip">linux-0.11-devel-040923.zip</A>, 
+  which uses the special boot software <A 
+  href="http://oldlinux.org/Linux.old/bin-src/shoelace.tar.Z">shoelace</A> to 
+  boot from hd image file, has been built. To boot with the shoelace software, a 
+  trick should be played with in the partition table of harddisk image file. So 
+  this new Linux 0.11 system got a new hd image file with 127MB in size. 
+  <LI>2004-09-02<BR>To accommodate with the experiments in chapter 14 in the 
+  ebook, always use the latest image file releases for bochs. The latest 
+  Linux-0.11-devel package is <A 
+  href="http://oldlinux.org/Linux.old/bochs/linux-0.11-devel-040809.zip">linux-0.11-devel-040809.zip</A>. 
+
+  <LI>2004-05-21<BR>Added bookmark function to the book of v1.9.5 version. 
+  corrected page number errors. The book name is still the same. The "big" 
+  difference is on the cover page: the revision number changed to V1.9.5, 
+  yesterday's is V1.95. 
+  <LI>2004-05-20<BR>The new version v1.9.5 of the book (A heavily commented 
+  Linux kernel source code) is released today. There are lots of modifications 
+  to this new version and a new chapter (ch14) is added too.Thank you all 
+  friends that help me to improve the correctness &amp; quality of the book. You 
+  can now download this new release <A 
+  href="http://oldlinux.org/download/clk011c-1.9.5.pdf">here (pdf) </A>. You can 
+  also download it from in the BBS. BTW, with the help from many kind friends, 
+  I'll do my best to translate it into english. Thank you! 
+  <LI>2004-05-14<BR>The MINIX-386 system can, now, run under the Bochs emulation 
+  system. The priviously released MINIX-386 image file (2004.02.23) can only be 
+  used on a real machine. Because the MINIX 1.5 kernel uses a DOS int 0x15 
+  function 0x89 to switch to the protected mode in its start.s program, which 
+  the Bochs does not support. So I refers to the modification of freebird 
+  (wsx00000 at sina.com.cn), add several lines of code to replace the DOS int. 
+  Now the <A 
+  href="http://oldlinux.org/Linux.old/bochs/MINIX-1.5-040514.zip">MINIX-386</A> 
+  can run smoothly under Bochs. Thanks freedird! 
+  <LI>2004-05-12<BR>These days I start translating the book into english because 
+  some friends intended me to do so. As my english is so poor I am afraid I 
+  couldn't finish this tough work. But its a good chance for me to check all 
+  commentaries in the book although the translation speed is almost unendurable 
+  :) Yes, I did learnt a lot of basics from the book, so I want more people to 
+  enjoy it. At least know there is a such book floating around on Internet :) 
+  Recently, I have corrected lots of mistakes in the book and preparing to 
+  releasse a new revision soon. The new revision will include all the updates in 
+  BBS and some new enhanced comments that I not yet published. Thanks for your 
+  supporting! 
+  <LI>2004-05-11<BR>Distribute a Linux 0.12 snap-shot system built under bochs. 
+  This one contains numerous source codes in the /usr/src/ directory. The name 
+  is linux-0.12-0402XX-snap.zip andlinux-0.12-0403XX-snap.zip in 
+  Linux.old/bochs/ directory (Linux Ancient Resources). The system extracted 
+  from bochs is in the directory: Linux.old/distributions/OldLinux/. There only 
+  contain the latest one: OldLinux-0.12-20040304.tar.Z 
+  <LI>2004-05-05<BR>The <A href="http://kernel.org/">kernel.org</A> is start 
+  mirroring the resources of this site.You will be able to download everything 
+  from <A 
+  href="http://mirrors.kernel.org/oldlinux/">mirrors.kernel.org/oldlinux/</A> 
+  not long after. I have done some hardworks rearranging the resources in 
+  Linux.old. In order to seperate others from oldlinux resources I put all other 
+  stuffs in a directory 'study'. If you find any links in BBS to the 'Linux.old' 
+  was broken, then the files must be in the study directory. 
+  <LI>2004-04-30<BR>Added a new chapter to the ebook above. "Expriment 
+  Envirnment Setup &amp; Usage". This chapter mainly describe the using of Linux 
+  0.11 in the Bochs system. There are also contain messages about IO from/too 
+  the virtual system (through disk images). You can download this chapter in 
+  BBS. 
+  <LI>2004-04-23<BR>A couple of weeks ago, I have released the rebuilt 
+  Linux-0.11 system. Today I release the new one. The BIG enhancement is that it 
+  contains a gcc 1.40 compiling environment. You can use it to compile kernel 
+  source in the /usr/src/ directory. The name of this release is <A 
+  href="http://oldlinux.org/Linux.old/bochs/linux-0.11-devel-040329.zip">linux-0.11-devel-040329.zip</A>. 
+  Also configured for use in bochs environment. The zipped system is in the <A 
+  href="http://oldlinux.org/Linux.old/distributions/OldLinux/">/Linux.old/distributions/OldLinux/</A>directory. 
+  Download it &amp; have a try! 
+  <LI>2004-04-22<BR>There was a paper titled "LINUX--a free unix-386 kernel" 
+  written by Linus Torvalds in October 1991. This 8-paged file was written when 
+  linux kernel 0.03 was released. In the paper, Linus states that the LINUX "is 
+  meant for hackers/computer science students to use, learn and enjoy....The GNU 
+  kernel (Hurd) will be free, but is currently not ready, and will be too big to 
+  understand and learn." Now, then, the current Linux system is just like the 
+  Hurd at that time. It's too big for the newbies to learn &amp; understand. So, 
+  this is why I pick up Linux kernel 0.1x again and rebuild the related running 
+  system.... Now you can download and read this <A 
+  href="http://oldlinux.org/Linux.old/Linux-0.01/docs/Linux.pdf">paper</A> 
+  again. JUST FOR FUN or learning something from it. Enjoy. 
+  <LI>2004-04-19<BR>Due to the unknown problems with the old server, this site 
+  was unstable and finally shuted. Now we are moving to another server and 
+  reconstruting the site. With the help from Trent Jarvi(www.rxtx.org), a new 
+  mirror site has also been created: <A 
+  href="http://oldlinux.qbang.org/">oldlinux.qbang.org</A>. Thank you Trent 
+  Jarvi! 
+  <LI>2004-03-27<BR>I spent a whole day modifying the syntax of kernel 0.11 
+  source code for compiling under Redhat 9 system. Now its working with the 
+  root-0.11 Image file. The file name is <A 
+  href="http://oldlinux.org/Linux.old/kernel/0.1x/linux-0.11-040327-rh9.tar.gz">linux-0.11-040327-rh9.tar.gz</A>. 
+  The diff file is <A 
+  href="http://oldlinux.org/Linux.old/kernel/0.1x/linux-0.11-040327-rh9.diff.gz">here</A>. 
+  You can also download the compiled Image file <A 
+  href="http://oldlinux.org/Linux.old/images/Image-0.11-040327-rh9">Image-0.11-040327-rh9</A>. 
+
+  <LI>2004-03-23<BR>Built bash 1.05 with no job control for the orignal 
+  bootimage-0.11 image file. The orignal bootimage-0.11 means it was compiled 
+  without any modification to the source code of kernel 0.11. This bootimage 
+  file <A 
+  href="http://oldlinux.org/Linux.old/images/rootimage-0.11.Z">rootimage-0.11.Z</A> 
+  can be downloaded from the Learning materials directory. 
+  <LI>2004-03-20<BR>We found an old linux version <A 
+  href="http://oldlinux.org/Linux.old/kernel/linux-0.11-pre.tar.Z">linux-0.11-pre</A> 
+  on tytso's archived website. Its release date was 91.12.03. I havn't test it. 
+  <LI>2004-03-06<BR>Added mount/umount and mtools in the <A 
+  href="http://oldlinux.org/Linux.old/bochs/linux-0.11-040305.zip">linux-0.11</A> 
+  system. Now you can mount/umount any MINIX 1.x filesystem and change data from 
+  within DOS diskettes. Built 0.11 and 0.12 boot/root image files. Now they are 
+  in the <A href="http://oldlinux.org/Linux.old/images/">Learning Materials</A> 
+  directory. 
+  <LI>2004-03-04<BR>Created a true linux <A 
+  href="http://oldlinux.org/Linux.old/bochs/linux-0.11-040304.zip">kernel 0.11 
+  system</A> in bochs. 
+  <LI>2004-02-23<BR><A 
+  href="http://oldlinux.org/download/MINIX15.img.tar.gz">MINIX-386 Harddisk 
+  clone</A> (210MB RAR to 96MB), ghost format. The environment that Linus 
+  developped linux system. The hard disk parameters are: cyls=685, hds=16, 
+  sects=38. Username/Passwd: root/root. 
+  <LI>2004-02-07<BR>Added three sub discussion board for Free Software Projects. 
+
+  <LI>2004-01-06<BR>Rebuilt the linux 0.1x rootimage disk: <A 
+  href="http://oldlinux.org/download/rootimage-0.12.Z">rootimage-0.12.Z</A>(812KB). 
+  It can also be used with bootimage-0.95. 
+  <LI>2004-01-04<BR>Create a linux 0.1x kernel system used in bochs:<A 
+  href="http://oldlinux.org/download/linux-0.1x.zip">linux-0.1x.zip</A> (2MB). 
+  <LI>2003-12-18<BR>If you cannot login the BBS correctly, please use the link<A 
+  href="http://www.oldlinux.org/cgi-bin/leoboard.cgi">http://www.oldlinux.org/cgi-bin/leoboard.cgi</A>. 
+
+  <LI>2003-12-08<BR>Release modified version 1.2.2 
+  <LI>2003-10-07<BR>Release modified version 1.1 </LI></UL>
+<HR>
+I am very interested in collecting old linux distributions (prior to 1995). If 
+you have any old distros around on CDROM or diskettes, I would appreciate a 
+copy. The older the better :-) Note that we are primarily interested in whole 
+runnable old systems, not just the kernel source code. <BR>Email:  
+ <A 
+href="mailto:Jiong.Zhao@tongji.edu.cn">jiong.zhao@tongji.edu.cn</A> (Previously: 
+gohigh@shtdu.edu.cn ) 
+<HR>
+$ Site created 2004.01.29 by gohigh, Last updated 2019.02.08 $ 
+<TABLE border=0 cellSpacing=0 cellPadding=0>
+  <TBODY>
+  <TR>
+    <TD>ICP: <A href="http://www.miibeian.gov.cn/"><img src=images/ShanghaiReg.png></A>
+      <DIV></DIV></TD></TR></TBODY></TABLE></FONT></BODY></HTML>

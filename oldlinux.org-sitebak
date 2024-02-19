@@ -1,0 +1,100 @@
+server {
+        listen 80;
+        server_name  oldlinux.org *.oldlinux.org *.tlinux.org *.ulinux.org *.ulinux.net *.plinux.org *.glinux.net *.tlinux.net *.pcbook.org *.linuxdb.com *.linuxdb.net *.linuxdb.org;
+        root /var/www/homepage/oldlinux.org;
+        
+        error_page   500 502 503 504  /50x.html;
+        location = /50x.html {
+                root   /var/www/nginx-default;
+        }
+        location ~ ^/oldlinux/.*images {
+	  access_log off;
+
+          if (-f $request_filename) {
+            expires 5d;
+            break;
+          }
+        }
+
+#        location /forum/(images|clientscript|oiquantinhoc)/.* {
+#                expires 30d;
+#        }
+
+	 location ~ ^/lxr/http/(search|ident|diff|find|source|ident1) {
+		if ($fastcgi_script_name ~ ^/lxr/http/(search|ident|diff|find|source|ident1)(.*)$) {
+			set $fastcginame $1;
+			set $querystring $2;
+		}
+		fastcgi_pass    unix:/tmp/nginx-fcgi.sock;
+		fastcgi_read_timeout    5m;
+		fastcgi_index    "";
+	 	include  /etc/nginx/nginx-fcgi.conf;
+		fastcgi_param    SCRIPT_FILENAME  $document_root/lxr/http/$fastcginame;
+		fastcgi_param    PATH_INFO  $querystring;
+	 }
+	 location ~ ^/lxr/http_cn/(search|ident|diff|find|source|ident1) {
+		if ($fastcgi_script_name ~ ^/lxr/http/(search|ident|diff|find|source|ident1)(.*)$) {
+			set $fastcginame $1;
+			set $querystring $2;
+		}
+		fastcgi_pass    unix:/tmp/nginx-fcgi.sock;
+		fastcgi_read_timeout    5m;
+		fastcgi_index    "";
+	 	include  /etc/nginx/nginx-fcgi.conf;
+		fastcgi_param    SCRIPT_FILENAME  $document_root/lxr/http_cn/$fastcginame;
+		fastcgi_param    PATH_INFO  $querystring;
+	 }
+	 location ~ \.cgi$ {
+		fastcgi_pass    unix:/tmp/nginx-fcgi.sock;
+		fastcgi_read_timeout    5m;
+		fastcgi_index    "index.cgi";
+	 	include  /etc/nginx/nginx-fcgi.conf;
+#		fastcgi_param    SCRIPT_FILENAME  $document_root/lxr/http/$fastcginame;
+#		fastcgi_param    PATH_INFO  $querystring;
+	 }
+	location /oldlinux/uc_server/ {
+		access_log off;
+	}
+
+
+	location /Linux.old/ {
+		autoindex  on;
+		alias /var/www/homepage/Linux.old/;
+	}
+	
+	location /Book-Lite/ {
+		autoindex on;
+		alias /var/www/homepage/oldlinux.org/Book-Lite/;
+	}
+
+        location / {
+        index index.php index.html index.htm;
+        }
+
+        location ~ \.php$ {
+                fastcgi_pass   unix:/var/run/php-fpm/php-fcgi.sock;
+                fastcgi_index  index.php;
+                fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+                include /etc/nginx/fastcgi_params;
+        }
+
+    listen 443 ssl; # managed by Certbot
+    ssl_certificate /etc/letsencrypt/live/oldlinux.org/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/oldlinux.org/privkey.pem; # managed by Certbot
+    include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+    ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+
+}
+
+server {
+#    if ($host = oldlinux.org) {
+#        return 301 https://$host$request_uri;
+#    } # managed by Certbot
+#
+#
+#        listen   80;
+#        server_name  oldlinux.org *.oldlinux.org *.tlinux.org *.ulinux.org *.ulinux.net *.plinux.org *.glinux.net *.tlinux.net *.pcbook.org *.linuxdb.com *.linuxdb.net *.linuxdb.org;
+#    return 404; # managed by Certbot
+#
+#
+#}

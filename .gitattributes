@@ -1,0 +1,6 @@
+Arduino/arduino-1.8.10-windows.exe filter=lfs diff=lfs merge=lfs -text
+Arduino/arduino-1.8.10-windows.zip filter=lfs diff=lfs merge=lfs -text
+Book-Lite/Bochs/Bochs-Images/linux-0.12-080324.zip filter=lfs diff=lfs merge=lfs -text
+Book-Lite/Bochs/Bochs-Images/linux-0.12-080324/linux-0.12-080324/rootimage-0.12-hd filter=lfs diff=lfs merge=lfs -text
+download/MINIX15.img.tar.gz filter=lfs diff=lfs merge=lfs -text
+download/Book-Lite.tar.gz filter=lfs diff=lfs merge=lfs -text

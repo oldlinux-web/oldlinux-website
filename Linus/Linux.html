@@ -1,0 +1,553 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+
+<!--Converted with jLaTeX2HTML 2002 (1.62) JA patch-1.4
+patched version by:  Kenshi Muto, Debian Project.
+LaTeX2HTML 2002 (1.62),
+original version by:  Nikos Drakos, CBLU, University of Leeds
+* revised and updated by:  Marcus Hennecke, Ross Moore, Herb Swan
+* with significant contributions from:
+  Jens Lippmann, Marek Rouchal, Martin Wilck and others -->
+<HTML>
+<HEAD>
+<TITLE>LINUX--a free unix-386 kernel</TITLE>
+<META NAME="description" CONTENT="LINUX--a free unix-386 kernel">
+<META NAME="keywords" CONTENT="Linux">
+<META NAME="resource-type" CONTENT="document">
+<META NAME="distribution" CONTENT="global">
+
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<META NAME="Generator" CONTENT="jLaTeX2HTML v2002 JA patch-1.4">
+<META HTTP-EQUIV="Content-Style-Type" CONTENT="text/css">
+
+<LINK REL="STYLESHEET" HREF="Linux.css">
+
+</HEAD>
+
+<BODY >
+<!--Navigation Panel-->
+<IMG WIDTH="81" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next_inactive" SRC="nx_grp_g.png"> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev_g.png">   
+<BR>
+<BR>
+<BR>
+<!--End of Navigation Panel-->
+<H1 ALIGN="CENTER">L<SMALL>INUX</SMALL>--a free unix-386 kernel</H1>
+<P ALIGN="CENTER"><STRONG>Linus Torvalds (torvalds@kruuna.helsinki.fi)</STRONG></P>
+<P ALIGN="CENTER"><STRONG>October 10, 1991</STRONG></P>
+
+<P>
+
+<H1><A NAME="SECTION00010000000000000000">
+Introduction to L<SMALL>INUX</SMALL></A>
+</H1>
+
+<P>
+
+<H2><A NAME="SECTION00011000000000000000">
+What is L<SMALL>INUX</SMALL>?</A>
+</H2>
+
+<P>
+L<SMALL>INUX</SMALL> is a free unix-like kernel for 386-AT computers, coming with
+full source code. It is meant for hackers/computer science students to
+use, learn and enjoy. It is written mostly in <TT><B>C</B></TT>, but parts of
+it are in gnu-format assembler, and the boot-sequence is in intel 086
+assembly language. The <TT><B>C</B></TT>-code is relatively ANSI, with a few
+GNU enhancements (mostly <TT>__asm__</TT> and <TT>inline</TT>).
+
+<P>
+While there are a number of unices available for 386 computers, most of
+them cost a lot of money, and come with no source. Thus, they are ideal
+for actually <I>using</I> your computer, but if you want to learn how
+they work, you are f- -ked.
+
+<P>
+There are also a few unices available with source. Minix, the learning
+tool written by Andrew S.&nbsp;Tanenbaum, has been used in universities as a
+teaching tool for years. The BSD-386 system comes with source, but has a
+restrictive copyright and costs a lot of money ($995 is the starting
+price, I think). The GNU kernel (Hurd) will be free, but is currently
+not ready, and will be too big to understand and learn.
+
+<P>
+L<SMALL>INUX</SMALL> most closely resembles Minix, in that it is small and not very
+sophisticated, and thus easy (well...) to understand.  L<SMALL>INUX</SMALL> was
+also written under Minix, so there are quite a bit of similarities, and
+any Minix hacker will feel relatively at home with L<SMALL>INUX</SMALL>.  None of the
+Minix code was used in the project though, so the Minix copyright
+doesn't cover the new system.  It also is <I>completely free</I>, and has
+a very loose copyright.  Thus there is no need for megabytes of diffs
+like under Minix. 
+
+<P>
+
+<H2><A NAME="SECTION00012000000000000000">
+The L<SMALL>INUX</SMALL> copyright</A>
+</H2>
+
+<P>
+While being freely distributable, I do restrict the use of L<SMALL>INUX</SMALL> in a
+few ways:
+
+<UL>
+<LI>You may freely copy and redistribute the source and binaries, <B>as long as:</B>
+
+<UL>
+<LI>complete source is available. Thus binaries may not be distributed
+by themselves, even if you have made changes to them.
+</LI>
+<LI>you do not profit from the distribution. In fact even ``handling
+costs'' are not acceptable.
+</LI>
+<LI>you keep the appropriate copyrights intact.
+</LI>
+</UL>
+</LI>
+<LI>You may change the source to your liking, but if you distribute
+parts of the new system (or just binaries), all the new code must be
+included.
+</LI>
+<LI>You may make small excepts from the code without including
+copyrights. This is up to you, but a reference to me or the code would
+be appreciated.
+</LI>
+</UL>
+This should be loose enough not to cause any worry in anybody using or
+expanding the system. If you have a friend who really doesn't want the
+source, but just a working binary, you may of course give it to him
+without worrying whether I will sue you. Keep it between friends, though.
+
+<P>
+
+<H2><A NAME="SECTION00013000000000000000">
+Hardware/software needed to get L<SMALL>INUX</SMALL> running</A>
+</H2>
+
+<P>
+L<SMALL>INUX</SMALL> was written on a 386-AT running Minix. As L<SMALL>INUX</SMALL> is a real
+operating system, and goes directly to the hardware to do things, you
+have to have a very similar system to get it going without problems:
+
+<UL>
+<LI>386-AT (PS/2's are different enough that things won't work)
+</LI>
+<LI>VGA or EGA screen hardware.
+</LI>
+<LI>Standard AT hard-disk interface, IDE disks work fine (in fact
+that's what I use).
+</LI>
+<LI>Normal real-mode BIOS. Some machines seem to use virtual-86 mode
+to run the bootup program, and on such machines L<SMALL>INUX</SMALL> won't boot up
+and run correctly.
+</LI>
+</UL>
+
+<P>
+While L<SMALL>INUX</SMALL> will be expanded to be a self-sufficient system, Minix-386
+is currently needed to get the ball rolling. You need Minix to make the
+initial root file system, and to compile the OS binary. After that
+L<SMALL>INUX</SMALL> is a self-sufficient system, but Minix is recommended in order
+to make file system checking (<TT>fsck</TT>) and to recompile the system
+after making changes.
+
+<P>
+
+<H2><A NAME="SECTION00014000000000000000">
+Getting L<SMALL>INUX</SMALL></A>
+</H2>
+
+<P>
+L<SMALL>INUX</SMALL> can currently be gotten by anonymous <TT>ftp</TT> from <TT>`nic.funet.fi'</TT> in the
+directory <TT>'/pub/OS/Linux'</TT>. This directory contains the full source to the operating
+system, as well as a couple of binaries so that you can actually use the
+system.
+
+<P>
+<BR><B>NOTE! The binaries are mostly GNU software,
+and are under a stricter copyright (the GNU copyleft) than the </B>L<SMALL>INUX</SMALL><B> sources.  Thus you may not redistribute them without distributing their
+source, found in <TT>/pub/GNU</TT>. See any GNU software package for more
+information on the GNU copyleft.
+<BR></B>
+
+<P>
+The various files found in this directory are:
+
+<UL>
+<LI><TT>linux-0.03.tar.Z</TT>--complete source to the operating system,
+in a 16-bit compressed tar archive.
+</LI>
+<LI><TT>Linux.tex</TT>--L<SUP><SMALL>A</SMALL></SUP>T<SMALL>E</SMALL>X source for this file.
+</LI>
+<LI><TT>bash.Z</TT>--bash binary to run under L<SMALL>INUX</SMALL>. This binary should
+be put under tha name <TT>/bin/sh</TT> in the file system reserved for
+L<SMALL>INUX</SMALL> (see installation).
+</LI>
+<LI><TT>update.Z</TT>--update binary, to be put in <TT>/bin/update</TT>.
+</LI>
+<LI><TT>gccbin.tar.Z</TT>--GNU cc binaries needed to get a working
+compiler. This tarred archive contains the compiler, loader, assembler
+and support programs (nm, strip etc). It also contains a small library
+sufficient for most programs.
+</LI>
+<LI><TT>include.tar.Z</TT>--include-files necessary to get gcc working.
+</LI>
+<LI><TT>unistd.tar.Z</TT>--source to the unistd library routines (ie
+system call interface). With this you can build a bigger library by
+using system-independent library sources.
+</LI>
+<LI><TT>utilbin.tar.Z</TT>--binaries to various GNU utilities, including
+GNU fileutils, make and tar. Also contains the emacs-clone <TT>uemacs</TT>.
+</LI>
+<LI><TT>README, RELNOTES-0.01, INSTALLATION</TT>--ascii files containing
+some (somewhat out-of-date) information about L<SMALL>INUX</SMALL>.
+</LI>
+</UL>
+
+<P>
+The absolute minimum needed to get a system going is the OS source and
+the bash and update binaries. You won't be doing much with just these
+though.
+
+<P>
+
+<H1><A NAME="SECTION00020000000000000000">
+Installation</A>
+</H1>
+
+<P>
+After you have gotten the necessary L<SMALL>INUX</SMALL> files, you need to compile
+the system and make a root directory. The necessary binaries need to be
+put in the root file system.
+Do this:
+
+<OL>
+<LI>Back up your software. While L<SMALL>INUX</SMALL> never has destroyed any of my
+files, nothing is certain. Better safe than sorry.
+</LI>
+<LI>Choose/make a standard Minix HD-partition to be the new L<SMALL>INUX</SMALL> root
+file system.
+</LI>
+<LI>Make the necessary device nodes on the new root.  L<SMALL>INUX</SMALL> uses the
+same type of nodes as Minix, so use the Minix <TT>mknod</TT> command to
+make the following devices:
+
+<UL>
+<LI><TT>/dev/tty</TT>
+</LI>
+<LI><TT>/dev/tty[0-2]</TT>
+</LI>
+<LI><TT>/dev/hd[0-9]</TT>
+</LI>
+</UL>
+Node numbers are the same as in Minix.
+</LI>
+<LI>Move the necessary files to the new root partition. The files
+should be in the following directories:
+
+<UL>
+<LI><TT>/bin:</TT>
+
+<UL>
+<LI><TT>sh</TT>, ie <TT>bash.Z</TT>.
+</LI>
+<LI><TT>update</TT>
+</LI>
+</UL>
+</LI>
+<LI><TT>/usr/bin:</TT>
+
+<UL>
+<LI>Contents of <TT>utilbin.tar.Z</TT>
+</LI>
+</UL>
+</LI>
+<LI><TT>/usr/include:</TT>
+
+<UL>
+<LI>Contents of <TT>include.tar.Z</TT>
+</LI>
+</UL>
+</LI>
+<LI><TT>/usr/local/lib:</TT>
+
+<UL>
+<LI>Contents of <TT>gccbin.tar.Z</TT>, excepting <TT>gcc</TT>
+</LI>
+</UL>
+</LI>
+<LI><TT>/usr/local/bin:</TT>
+
+<UL>
+<LI><TT>gcc</TT>
+</LI>
+<LI>links to files in <TT>/usr/local/lib</TT> of your choice. I link
+<TT>ld</TT>, <TT>as</TT>, <TT>nm</TT>, <TT>strip</TT> and <TT>size</TT> to their
+counterparts in <TT>/usr/local/lib/gcc-XXX</TT>.
+</LI>
+</UL>
+</LI>
+<LI>Edit the <TT>linux/include/linux/config.h</TT> file for your system. 
+This file contains the system-specific information: memory space, disk
+types, root partition number (again the numbering is the same as in
+Minix), keyboard type (currently just US and Finnish) etc. 
+</LI>
+<LI>Compile the L<SMALL>INUX</SMALL> sources.  A simple <TT>make</TT> should do the
+trick, after you have edited the <TT>makefile</TT>s to suit your system
+(ie, removed the <TT>-mstring-insns</TT> flag and changed the paths to suit
+you.) Users of <TT>gcc</TT> versions earlier than 1.40 will probably have
+to add <TT>gnulib</TT> to the `<TT>LIBS =</TT>'-line in the <TT>makefile</TT>. 
+</LI>
+<LI>Copy the resultant <TT>Image</TT>-file to a floppy (ie, <TT>cp Image
+/dev/PS0</TT> or similar.)
+</LI>
+<LI>Reboot with the new floppy. The startup screen should tell you
+that the system is booting (<TT>Loading system ...</TT>), then some vital
+root file system information (<TT>xxx/XXX inodes/blocks free</TT>),
+followed by a <TT>Ok.</TT> and the bash prompt (initially <TT>bash#</TT> if
+you have no <TT>.bashrc</TT> file).
+</LI>
+</UL>
+
+<P>
+Hopefully you now have a functioning unix, and you are logged in as
+<TT>root</TT>. L<SMALL>INUX</SMALL> currently has no <TT>'init'</TT> process, and as soon
+as you log out, the system will <TT>sync</TT> and just wait. Use the
+three-finger-salute to reboot your machine.
+
+<P>
+</LI>
+</OL>
+
+<P>
+
+<H1><A NAME="SECTION00030000000000000000">
+Things missing/incomplete in L<SMALL>INUX</SMALL></A>
+</H1>
+
+<P>
+While L<SMALL>INUX</SMALL> is meant to be a fully selfsufficient kernel, this is
+currently not the case. As already mentioned, you need Minix to set
+things up, and to check the file system once it's running. There are a
+number of other deficiencies:
+
+<UL>
+<LI>Incomplete hardware-support. Some of the standard features of an
+AT are not currently supported. Most notably are floppy disk drives,
+making using L<SMALL>INUX</SMALL> for real work (backing up etc) currently not
+possible. Also some of the features of the serial lines aren't yet
+implemented (hard-wired to 2400bps, no hang-up notification etc).
+</LI>
+<LI>Incomplete standard C library. The <TT>libc.a</TT> found in the gcc
+distribution package is not complete, and I'm very much interested in
+freely distributable library functions.
+</LI>
+<LI>Some of the system calls are not fully implemented.  This concerns
+mostly ``seldom-used'' features like debugging (yeah, who needs it
+anyway, don't all your programs work the first time <TT>:-)</TT> and some
+other features. 
+</LI>
+<LI>As mentioned, no <TT>login</TT> and <TT>init</TT> processes. Currently
+L<SMALL>INUX</SMALL> boots up in single-user mode, with the root as console-user.
+This is enough for some porting work, but not really practical.
+</LI>
+<LI>387-support is not yet implemented, although some skeleton
+routines are present. The gcc-binary found on <TT>`nic.funet.fi'</TT> will correctly use
+soft-float (ie emulation function calls) for the four basic math
+operations. 387-support will materialize as soon as a 387 finds its way
+into my computer. Hopefully in a month or two.
+</LI>
+<LI>None of the important system-administration commands has yet been
+written for L<SMALL>INUX</SMALL>. These include things like <TT>mkfs</TT>, <TT>format</TT>,
+<TT>fsck</TT>, <TT>mknod</TT> etc. Some of these need kernel features not yet
+implemented (<TT>format</TT>, <TT>mknod</TT>), some just need to be written.
+As with the library, I'd welcome any freely distributable files.
+</LI>
+</UL>
+
+<P>
+As you can see, L<SMALL>INUX</SMALL> is as yet not a complete system.  Your help is
+appreciated to make it better.  I'm not interested in Minix-commands
+rewritten for L<SMALL>INUX</SMALL>, unless you have written them yourself from
+scratch.  You are of course free (and encouraged) to use everything you
+have in your Minix-distribution for your own L<SMALL>INUX</SMALL>-system, but due to
+the Minix copyrights, they cannot be distributed to a wider audience.
+
+<P>
+Some of the probelms mentioned here will be fixed by me (ie serial
+lines/387/floppy support) as soon as possible, but I'm hoping to get
+help with the libraries etc.  Bug-reports/patches and wish-lists will be
+appreciated, and if you actually have the patch to the problem, I'll try
+to implement it right away. Small changes will be sent out as patches to
+the mailing list and be set up on <TT>`nic.funet.fi'</TT>, but after heavy rewrites or
+bigger patches, the whole system will be updated at <TT>`nic.funet.fi'</TT>.
+
+<P>
+
+<H1><A NAME="SECTION00040000000000000000">
+Porting software for L<SMALL>INUX</SMALL></A>
+</H1>
+
+<P>
+L<SMALL>INUX</SMALL> was designed to make porting relatively easy. Thus the full
+<TT>termios</TT>-implementation, and the somewhat <TT>POSIX</TT> library. The
+(admittedly relativly few) programs I've ported posed no problems.
+
+<P>
+Even though L<SMALL>INUX</SMALL> resembles Minix a great deal, Minix programs are not
+generally easier to port than programs designed for some other unix.
+Thus I wouldn't recommend starting from a Minix-version of a particular
+program, but instead trying to port the ``virgin'' program from scratch.
+Being closer to SYSV than BSD means that most programs port easily when
+given a <TT>-DUSG</TT> or <TT>-DSYSV</TT> flag.
+
+<P>
+One of the more difficult problem in porting can be missing library
+functions. These must be written by you, or copied from some other
+source (Minix being one possibility for those that have it).
+Alternatively, some programs (notably GNU) have various flags making it
+possible to define which functions aren't available (the GNU fileutils
+will compile quite nicely, once a sufficient number of
+<TT>-DXXX_MISSING</TT> flags are added to the <TT>Makefile</TT>.)
+
+<P>
+
+<H2><A NAME="SECTION00041000000000000000">
+Programs already ported</A>
+</H2>
+
+<P>
+These programs have already been ported to L<SMALL>INUX</SMALL>:
+
+<UL>
+<LI>GNU cc (gcc, cc1, cpp)
+</LI>
+<LI>GNU assembler (as386)
+</LI>
+<LI>GNU binutils (ld, ar, nm, size, strip, ranlib)
+</LI>
+<LI>GNU compress (16-bit)
+</LI>
+<LI>GNU tar
+</LI>
+<LI>GNU make
+</LI>
+<LI>GNU bash (Bourne Again SHell)
+</LI>
+<LI>GNU sed
+</LI>
+<LI>GNU bison (yacc-lookalike)
+</LI>
+<LI>GNU awk
+</LI>
+<LI>GNU fileutils (ls, cp, rm, mkdir, rmdir, tail etc)
+</LI>
+<LI>less
+</LI>
+<LI>uemacs
+</LI>
+</UL>
+
+<P>
+All of the above sources can be found on <TT>`nic.funet.fi'</TT> (mostly in
+<TT>`/pub/gnu'</TT>), and most of the L<SMALL>INUX</SMALL>-binaries can be found in the
+directory <TT>'/pub/OS/Linux'</TT>. All of these programs compiled without changes, even
+though gcc (cc1) has some enhancements of my own. Mail me for
+diffs/sources, but try first to compile them yourself.
+
+<P>
+Additionally I have reports that GNU diff compiles cleanly and works.
+
+<P>
+
+<H1><A NAME="SECTION00050000000000000000">
+Technical help</A>
+</H1>
+
+<P>
+L<SMALL>INUX</SMALL> currently has a mailing-list, which you can subscribe to by
+mailing to the address: <TT><B>Linux-activists-request@niksula.hut.fi</B></TT>
+and asking to be included into the list.  You can then ask questions by
+mailing them to <TT><B>Linux-activists@niksula.hut.fi</B></TT>, which will
+duplicate your question/answer/whatever and send them to all persons on
+the list. 
+
+<P>
+Note the difference between <TT>Linux-activists</TT> and
+<TT>Linux-activists-request</TT> -- the first sends mail to all persons on
+the list, the second is used only to subscribe and unsubscribe from the
+list.
+
+<P>
+Naturally, you can also mail me directly at <TT><B>torvalds@kruuna.helsinki.fi</B></TT>.  I'll try to answer all questions within a
+day or two.
+
+<P>
+Although <TT>`nic.funet.fi'</TT> will probably be kept reasonably up-to-date, there are a
+few problems with it (ie, I cannot personally get to the files, but have
+to go through a couple of persons). Thus people on the mailing-list will
+get patches/binaries faster if they ask for them.
+
+<P>
+
+<H1><A NAME="SECTION00060000000000000000">
+Thanks</A>
+</H1>
+
+<P>
+I'd like to thank the academy ...
+
+<P>
+Seriously, this system never would have seen the light of day or would
+have been much worse without the help of some others.  Bruce Evans
+helped me find the places needed to be changed in order for <TT>gcc</TT> to
+correctly handle floating point, and came with a lot of useful
+ideas/suggestions (and his Minix-386 was used to build the system). 
+Also, Earl Chew's <TT>estdio</TT> package was used for the standard
+IO-library.  More freely distributable packages like this!
+
+<P>
+Alain W Black and Richard Tobin made the gcc for Minix, without which I
+couldn't have compiled the thing.  GNU made most of the programs I use
+under L<SMALL>INUX</SMALL>.  Alfred Leung sent the US keyboard patches. 
+
+<P>
+PS. ``Thanks'' to <TT>wirzeniu@kruuna.helsinki.fi</TT> for his
+``constructive'' criticism and ``witty'' comments. He was also my first
+<IMG
+ WIDTH="14" HEIGHT="14" ALIGN="BOTTOM" BORDER="0"
+ SRC="img1.png"
+ ALT="$\alpha$">-tester, and should be given a medal for courage.
+
+<P>
+
+<H1><A NAME="SECTION00070000000000000000">
+About this document ...</A>
+</H1>
+ <STRONG>L<SMALL>INUX</SMALL>--a free unix-386 kernel</STRONG><P>
+This document was generated using the
+<A HREF="http://www.latex2html.org/"><STRONG>LaTeX</STRONG>2<tt>HTML</tt></A> translator Version 2002 (1.62)
+<P>
+Copyright &#169; 1993, 1994, 1995, 1996,
+<A HREF="http://cbl.leeds.ac.uk/nikos/personal.html">Nikos Drakos</A>, 
+Computer Based Learning Unit, University of Leeds.
+<BR>
+Copyright &#169; 1997, 1998, 1999,
+<A HREF="http://www.maths.mq.edu.au/~ross/">Ross Moore</A>, 
+Mathematics Department, Macquarie University, Sydney.
+<P>
+The command line arguments were: <BR>
+ <STRONG>latex2html</STRONG> <TT>-local_icons -address gohigh@sh163.net -split 1 Linux.tex</TT>
+<P>
+The translation was initiated by root on 2004-05-08<HR>
+<!--Navigation Panel-->
+<IMG WIDTH="81" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="next_inactive" SRC="nx_grp_g.png"> 
+<IMG WIDTH="26" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="up" SRC="up_g.png"> 
+<IMG WIDTH="63" HEIGHT="24" ALIGN="BOTTOM" BORDER="0" ALT="previous" SRC="prev_g.png">   
+<BR>
+<!--End of Navigation Panel-->
+<ADDRESS>
+gohigh@sh163.net
+</ADDRESS>
+</BODY>
+</HTML>

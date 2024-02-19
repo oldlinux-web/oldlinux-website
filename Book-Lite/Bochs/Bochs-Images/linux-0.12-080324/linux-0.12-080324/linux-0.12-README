@@ -1,0 +1,193 @@
+			Linux 0.1x System
+
+This is a old linux system containning almost all the tools and coresponding 
+sources at that time. The kernel version is 0.12. But the root file system 
+can be used for kernel 0.11, 0.12 and 0.9x. 
+
+Due to the kernel limits (no ptrace syscall), this system does not have any 
+debug tools such gdb, but it contains gcc 1.40 develop envirnment. So you can
+Compile the kernel and each kind of tools using the sources included.
+
+
+
+In order to remain the kernel as its kind, only few patches are used. These 
+patches include:
+	 Poe-IGL(Shadow Init) init patches to init/main.c;
+	 syscall rename patches to fs/namei.c;
+	 
+Changlog:
+=========
+2008.03.24
+	Nothing changed with kernel, but the santax of .bxrc files to use
+	with new bochs versions (2.3.x or later).
+	
+2004.03.23
+	Built two bash 1.05 shells w/o job control. (bash.job, bash.noj)
+	The bash.noj can be used with origanl bootimage-0.11 image file.
+	(Now named rootimage-0.11.Z)
+	
+2004.03.15
+	Try to compile linux 0.01 kernel. The procedure of compiling is 
+	easy and almost got no errors except need to add SYSSIZE manually.
+	But the Image cannot be used. It can only be operated on hd(s). But
+	I got "Bad partition table on drive 0". Using the debug function 
+	of Bochs, I followed into the procedure sys_setup() and found that
+	the rw_abs_hd() in hd.c return successfully but the buffer conatins
+	nothing! So the check sentence for '55','AA' certainly not passed.
+	Maybe this bootimage can be used with in an old pc. :)
+
+2004.03.14
+	Clean up all *.o files from /usr/src/ to reduce the ocuupation of
+	disk space. Add a 'w' command. Insert into sched.c two funcs: 
+	count_active_tasks() & 	calc_load(). Added some constants in 
+	sched.h (EXP_1 etc.)
+	
+2004.03.13
+	Updated the man tools. Modified its config.h for using nroff (e.g. 
+	Deleted the -Tascii options). Added the gzip-1.2.4. There is a 
+	gzip-1.0.4 source code. But when I found it in the Oldlinux/gnu 
+	directory, I had already installed the gzip-1.2.4 :)(gzip, gunzip
+	and zcat are the same).
+	
+2004.03.12
+	Add two more commands to the system: fdisk, ps (include free & kdb).
+	The kernel is heavily patched for the ps. When the kernel Image was
+	rebuilt, You must use command:
+		ps U /usr/src/linux/tools/system
+	to update the database used for ps (in /etc/psdatabase).
+
+2004.03.11
+	The bootimage-0.95 built from source code linux-0.95.tar.Z can not
+	be used with HD! I have suck with it! Originally, I want to build 
+	a linux 0.12+ by using the ptrace code from 0.95 source code. But 
+	this error had cost my 2 days time! 
+
+
+2004.03.09
+	Built bootimage-0.95 using souce code linux-0.95.tar.Z. The compiler
+	used is gcc 2.2.2d. When using gcc 1.40, I got 'program cc1 got fatal
+	signal 6' at compiling fork.c and console.c. When delete '-O', these
+	two piece of codes can be compiled. But the bootimage built is not
+	correctly (barfs regs messages) and couldn't be used.
+	Built bootimage-0.10. You must modify the Makefile. Because it had 
+	been heavily modified by tso. There is a problem in detecting hd in
+	hd.c file. So I have to modi it to detect no hds (NR_HD =0). Another
+	place you must modify is include/linux/kernel.h. Comment out the 
+	function prototypes of malloc & free_s. Because there were no these
+	two functions in 0.10. The kernel must use these two functions in
+	libc.a 	The new image file is bootimage-0.10.1. In the boot/ 
+	directory, there is a file used for converting as86 assembly to gas
+	assembly language.
+	
+2004.03.08
+	Not really!!!!!!!!!!!!!!!!!!!!
+	As I doubt that the error (Virtual memory execeed in 'new') was
+	caused by gcc2.2.2 not setting  ____brk_addr for the program, 
+	I modified the crt0.s. Added following 4 lines at the top:
+	/*-------------------------------------------------*/
+	movl $45, %eax    /* syscal setbrk() */
+	movl $0, %ebx     /* Actually to get the brk */
+	int $0x80
+	movl %eax, ____brk_addr
+	/*--------------------------------------------------*/
+	Now, triumph!!! The gcc 2.2.2 is working !!!
+	This method was stimulated by the 0.98.3's crt0.s
+	Now relinking the program with this new crt0.o, everything goes
+	OK! No '-g' or '-static' needed.
+	
+	Built 'install', 'cksum', 'bc', 'tput', 'crond'. Creates 'gcrt0.o'
+	and modified gcc 2.2.2's specs. Let it not search .../shared 
+	& .../jump directory. Now the specs looks like:
+	/*-------------------------------*/
+	...
+	*startfile:
+	%{g*:crt0.o%s} %{!g*:%{pg:gcrt0.o%s} %{!pg:%{p:gcrt0.o%s} %{!p:crt0.o%s )}}
+	...
+	/*---------------------------------*/
+	The gcrt0.s looks like:
+	/*---------------------------------------------*/
+	text
+	.globl _environ
+	__entry:
+	/* Set brk_addr. */
+		movl $45,%eax
+		movl $0,%ebx
+		int  $0x80
+		movl %eax,____brk_addr
+	/* setup profiling. This block is new. diff from crt0.s */
+		pushl $__mcleanup
+		call _atexit
+		addl $4, %esp
+		pushl $_etest
+		pushl $__entry
+		call _monstartup
+		addl $8,%esp
+	/* Setup _environ and call _main */
+		movl 8(%esp),%eax
+		movl %eax,_environ
+		call _main
+		pushl %eax
+	1:	call _exit
+		jmp 1b
+	.data
+	_environ:
+		.long 0
+	/*--------------------------------------------*/
+	Copyed the 'sync' cmd to the rootimage-0.11. 
+	In order to use gdb on linux 0.12, I will add some syscalls
+	to the kernel. The first one maybe sys_ptrace.
+
+	
+2004.03.07
+	Abort the installation of gcc 2.2.2d on linux 0.12 kernel!
+	The reason is: The linker ld compiled using source binsrc.tar.Z
+	can be used for gcc 1.40 and gcc 2.2.2. But The successfully 
+	compiled program that uses gcc222 will display error message:
+	" Virtual memory exceeded in 'new'" when used. So there is still
+	some errors in gcc 2.2.2d compiled in kernel 0.12 environment.
+	......
+	Now the gcc 2.2.2 can be used. But when using, we must include 
+	flag '-g' or '-static' for static linking, otherwise the linker
+	will search a noexited directory /usr/lib/gcc-lib/.../shared.
+	The linker can use new one compiled from binsrc.tar.Z or the old
+	one for gcc 1.40. 
+	The gcc 2.2.2 is very unstable in 0.12 environmen. We abandend it 
+	at last !!! (Virtuall memory execeeded in 'new')
+
+		
+2004.03.06
+	Because the ar & nm for gcc 1.40 could not recognize the 2.2.2 
+	libc.a correctly, I had to rebuild these compiling tools.
+	Get the binutils source (binsrc.tar.Z) modified by H.J.L. Compiled
+	it using linux 0.98.3 (ygg1992). Then set the machine type to zero
+	in all compiled binaries. So they can ran in in linux 0.12 environ. 
+	By using the 0.98.3's <include> & </usr/lib/gcc-lib/i386-linux/2.2.2d>
+	libs, all compile time error was dispear. but when using gcc 2.2.2 to
+	compile, at the linking period, there would be still contain some 
+	unkown error messages, ex. "Function not implemented for hello" by 
+	the ld. Maybe this is caused by 'specs' for the gcc or, caused by
+	some not implemented syscalls called by the ld. I'll check it 
+	tommorrow.
+	
+2004.03.05
+	Compiling the gcc 2.2.2. I can only correctly compile one stage.
+	The resultings gcc of the second stage will cause general protection
+	error. I don't know why. The installed the first stage gcc 2.2.2,
+	I can only use the old libc.a. As the ld or nm etc didn't reconize
+	some of the modules in libc.a (showing "malformed"). 
+	The orignal include files can be used. the new include (0.98.3's)
+	files will cause gcc generate some errors (___cerr_sbuf or something)
+	So I am going to compile the Libc.2.2.2 tomorrow.
+
+2004.03.04
+	Compiling the kernel 0.11. fix some issues associtated with file
+	date & time. Also did a diff ( diff -r linux-0.11 linux-0.11.org)
+	The linux 0.11 system is now fully completed.
+	
+2004.03.02
+	Add Linus rename syscall patch to enable moving directory.
+	Modfy init/main.c, change the default supervior's directory (root)
+	from /usr/root to /root.
+	
+2004.02.29
+	Add Shadow Init patch to enable using login.

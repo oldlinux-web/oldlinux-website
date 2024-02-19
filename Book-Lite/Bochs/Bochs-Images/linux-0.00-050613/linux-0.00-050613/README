@@ -1,0 +1,32 @@
+/*
+ *  Linux 0.00 - a fake version :)
+ */
+ 
+"it switched between two processes that printed AAAA...  and BBBB...  
+respectively by using the timer-interrupt - Gods I was proud over that"
+
+                                                    --Linus Torvalds
+
+
+2005-06-13: Include sources for Linux 0.11 and Redhat 9 systems. 
+	    Sources simplified.
+
+2005-01-20: This version is built under RedHat 9.
+
+---
+I built it under Linux 0.11. Just for fun and for learning something.
+Two tasks multtasking in level 3, but they are coded in 'kernel' code
+same as Linux kernel's task0 & task1. It has got one system call to 
+display character.
+
+The source has no or little comments, SORRY! If you want to understand
+what the hell they are meant, please look into the kernel 0.11 source
+code.
+
+Jiong Zhao (gohigh@sh163.net)
+
+www.oldlinux.org
+
+2004-12-17
+ 
+
